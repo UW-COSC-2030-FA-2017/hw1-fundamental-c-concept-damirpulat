@@ -72,5 +72,6 @@ int main()
 	testCollection.insert(1);
 	testCollection.print();
 
+
 	return 0;
 }
