@@ -1,7 +1,7 @@
 // Collection.h
 // Damir Pulatov
 // COSC 2030
-// 09/20/2017
+// 09/21/2017
 
 
 #ifndef COLLECTION_H
@@ -14,7 +14,7 @@
 using namespace std;
 
 /*
-	Store objects in collection class using pointer to array
+	Store objects in collection template class using pointer to array
 	Maximum size of array is passed through constructor with default at 10
 	Everytime user puts more elements in array than max size allows,
 	the size of array doubles
@@ -53,6 +53,11 @@ private:
 };
 
 
+/*
+	initialize current size to zero
+	default maximum capacity is 10
+	implement array using pointers
+*/
 template <class Object>
 Collection<Object>::Collection(int size)
 {
@@ -69,8 +74,8 @@ Collection<Object>::Collection(int size)
 template <class Object>
 Collection<Object>::~Collection()
 {
-	// Problem with destructor
-	// delete [] storage;
+	// Free memory
+	delete [] storage;
 }
 
 
@@ -81,6 +86,8 @@ void Collection<Object>::makeEmpty()
 	// free memory and reset current size to zero
 	delete [] storage;
 	currentSize = 0;
+
+	storage = new Object[maxSize];
 	
 	return;
 }
@@ -174,7 +181,7 @@ void Collection<Object>::removeRandom()
 template <class Object>
 bool Collection<Object>::notContained(Object x) const
 {
-	// iterate through array and if object is found, return true
+	// iterate through array and if object is found, return false
 	for (int i = 0; i < currentSize; i++)
 	{
 		if (storage[i] == x)
